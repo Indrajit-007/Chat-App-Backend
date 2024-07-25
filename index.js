@@ -21,7 +21,9 @@ app.use(express.json());
 app.use('/user', router);
 
 
-
+app.get("/sex", (req, res) => {
+    res.json({ "msg": "male" });
+})
 
 io.use((socket, next) => {
 
@@ -51,3 +53,5 @@ io.on("connection", (socket) => {
 ServerHere.listen(process.env.PORT, () => {
     console.log(`server running on http://localhost:${process.env.PORT}`)
 });
+
+module.exports = app;
