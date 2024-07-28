@@ -20,16 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/user', router);
 
-
-app.get("/sex", (req, res) => {
-    res.json({ "msg": "male" });
-})
-
 io.use((socket, next) => {
-
-    const Sessionid = socket.handshake.auth.Sessionid;
-    socket.Sessionid = Sessionid;
-    next();
+    if(socket.handshake.auth.Sessionid){
+        const Sessionid = socket.handshake.auth.Sessionid;
+        socket.Sessionid = Sessionid;
+        next()
+    }
+    return ;
 })
 
 io.on("connection", (socket) => {
